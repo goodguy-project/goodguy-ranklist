@@ -19,9 +19,9 @@ from PyQt5.QtWidgets import (
 from PyQt5.QtCore import Qt
 from pydantic import BaseModel
 
-ROOT = os.path.dirname(os.path.abspath(__file__))
-DATA_PATH = os.path.join(ROOT, '.json')
+from const import ROOT
 
+DATA_PATH = os.path.join(ROOT, 'manager', '.json')
 TEXT_FONT = QFont()
 TEXT_FONT.setPointSize(12)
 
@@ -90,25 +90,25 @@ class TableGUI(QTableWidget):
         try:
             with open(DATA_PATH, 'r', encoding='utf-8') as file:
                 self.__data: List[Dict[str, str]] = json.loads(file.read())
-                length = len(self.__data)
-                self.setRowCount(length)
-                # data
-                for row, people in enumerate(self.__data):
-                    for key, value in people.items():
-                        col = self.__header_label_map[key]
-                        self.setItem(row, col, QTableWidgetItem(value))
-                # delete
-                for row in range(length):
-                    col = self.__header_label_map['delete']
-                    button = QPushButton('delete')
-                    button.clicked.connect(partial(self.__delete, index=row))
-                    self.setCellWidget(row, col, button)
-                # update
-                for row in range(length):
-                    col = self.__header_label_map['update']
-                    button = QPushButton('update')
-                    button.clicked.connect(partial(self.__update, index=row))
-                    self.setCellWidget(row, col, button)
+            length = len(self.__data)
+            self.setRowCount(length)
+            # data
+            for row, people in enumerate(self.__data):
+                for key, value in people.items():
+                    col = self.__header_label_map[key]
+                    self.setItem(row, col, QTableWidgetItem(value))
+            # delete
+            for row in range(length):
+                col = self.__header_label_map['delete']
+                button = QPushButton('delete')
+                button.clicked.connect(partial(self.__delete, index=row))
+                self.setCellWidget(row, col, button)
+            # update
+            for row in range(length):
+                col = self.__header_label_map['update']
+                button = QPushButton('update')
+                button.clicked.connect(partial(self.__update, index=row))
+                self.setCellWidget(row, col, button)
         except FileNotFoundError:
             pass
 

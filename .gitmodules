@@ -1,0 +1,3 @@
+[submodule "goodguy-crawl"]
+	path = goodguy-crawl
+	url = https://github.com/goodguy-project/goodguy-crawl.git

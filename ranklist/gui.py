@@ -1,4 +1,3 @@
-import asyncio
 import json
 import logging
 import os
@@ -14,12 +13,7 @@ from PyQt5.QtWidgets import (
     QVBoxLayout,
     QTableWidgetItem,
     QAbstractItemView,
-    QPushButton,
-    QLabel,
-    QLineEdit,
-    QHeaderView,
 )
-from PyQt5.QtCore import Qt
 
 from crawl_service.crawl_service_impl import CrawlServiceImpl
 from crawl_service.crawl_service_pb2 import (
